@@ -3,8 +3,17 @@ import logoImg from "@/assets/logo.png";
 import Image from "next/image";
 import classes from "./main-header.module.css";
 import MainHeaderBackground from "./main-header-background";
+import { paths } from "@/lib/paths";
 
 export default function MainHeader() {
+  const { navigation } = paths;
+
+  const navLinks = Object.values(navigation).map((link) => (
+    <li key={link.label}>
+      <Link href={link.path}>{link.label}</Link>
+    </li>
+  ));
+
   return (
     <>
       <MainHeaderBackground />
@@ -15,14 +24,7 @@ export default function MainHeader() {
         </Link>
 
         <nav className={classes.nav}>
-          <ul>
-            <li>
-              <Link href="/meals">Browse Meals</Link>
-            </li>
-            <li>
-              <Link href="/community">Foodies Community</Link>
-            </li>
-          </ul>
+          <ul>{navLinks}</ul>
         </nav>
       </header>
     </>
