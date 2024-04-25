@@ -1,16 +1,19 @@
 import Link from "next/link";
-import logoImg from "@/assets/logo.png";
 import Image from "next/image";
-import classes from "./main-header.module.css";
+
 import MainHeaderBackground from "./main-header-background";
+
+import logoImg from "@/assets/logo.png";
+import classes from "./main-header.module.css";
 import { paths } from "@/lib/paths";
+import NavLink from "./nav-link";
 
 export default function MainHeader() {
   const { navigation } = paths;
 
   const navLinks = Object.values(navigation).map((link) => (
     <li key={link.label}>
-      <Link href={link.path}>{link.label}</Link>
+      <NavLink path={link.path}>{link.label}</NavLink>
     </li>
   ));
 
@@ -18,7 +21,7 @@ export default function MainHeader() {
     <>
       <MainHeaderBackground />
       <header className={classes.header}>
-        <Link className={classes.logo} href="/">
+        <Link className={classes.logo} href={paths.home.path}>
           <Image src={logoImg} alt="A plate with food on it" priority />
           Next level food
         </Link>

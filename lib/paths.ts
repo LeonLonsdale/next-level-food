@@ -1,8 +1,8 @@
 export const paths = {
+  home: { label: "Home", path: "/" },
   navigation: {
-    home: { label: "Home", path: "/" },
-    meals: { label: "Meals", path: "/meals" },
-    community: { label: "Community", path: "/community" },
+    meals: { label: "Browse Meals", path: "/meals" },
+    community: { label: "Foodies Community", path: "/community" },
   },
   dynamic: {
     meal: { path: (mealId: string) => `/meals/${mealId}` },
