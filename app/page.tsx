@@ -4,7 +4,6 @@ import { paths } from "@/lib/paths";
 import ImageSlideshow from "@/components/images/image-slideshow";
 
 export default function Home() {
-  const { navigation } = paths;
   return (
     <>
       <header className={classes.header}>
@@ -17,8 +16,8 @@ export default function Home() {
             <p>Taste and share food from all over the world.</p>
           </div>
           <div className={classes.cta}>
-            <Link href={navigation.community.path}>Join the community</Link>
-            <Link href={navigation.meals.path}>Explore meals</Link>
+            <Link href={paths.community.root.path}>Join the community</Link>
+            <Link href={paths.meals.root.path}>Explore meals</Link>
           </div>
         </div>
       </header>

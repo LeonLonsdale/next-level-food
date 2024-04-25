@@ -1,10 +1,29 @@
+// export const paths = {
+//   static: {
+//     home: { label: "Home", path: "/" },
+//     shareMeal: { label: "Share", path: "/meals/share" },
+//   },
+//   navigation: {
+//     meals: { label: "Browse Meals", path: "/meals" },
+//     community: { label: "Foodies Community", path: "/community" },
+//   },
+//   dynamic: {
+//     meal: { path: (mealId: string) => `/meals/${mealId}` },
+//   },
+// };
+
 export const paths = {
   home: { label: "Home", path: "/" },
-  navigation: {
-    meals: { label: "Browse Meals", path: "/meals" },
-    community: { label: "Foodies Community", path: "/community" },
+  meals: {
+    root: { label: "Browse Meals", path: "/meals" },
+    oneMeal: (slug: string) => `/meals/${slug}`,
+    share: { label: "Share a recipe", path: "/meals/share" },
   },
-  dynamic: {
-    meal: { path: (mealId: string) => `/meals/${mealId}` },
+  community: {
+    root: { label: "Foodies Community", path: "/community" },
   },
 };
+
+export const navLinks = Object.values(paths)
+  .map((link) => ("root" in link ? link.root : undefined))
+  .filter((root) => root !== undefined);

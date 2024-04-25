@@ -5,18 +5,10 @@ import MainHeaderBackground from "./main-header-background";
 
 import logoImg from "@/assets/logo.png";
 import classes from "./main-header.module.css";
-import { paths } from "@/lib/paths";
+import { navLinks, paths } from "@/lib/paths";
 import NavLink from "./nav-link";
 
 export default function MainHeader() {
-  const { navigation } = paths;
-
-  const navLinks = Object.values(navigation).map((link) => (
-    <li key={link.label}>
-      <NavLink path={link.path}>{link.label}</NavLink>
-    </li>
-  ));
-
   return (
     <>
       <MainHeaderBackground />
@@ -27,7 +19,16 @@ export default function MainHeader() {
         </Link>
 
         <nav className={classes.nav}>
-          <ul>{navLinks}</ul>
+          <ul>
+            {navLinks.map((link) => {
+              if (link)
+                return (
+                  <li key={link.path}>
+                    <NavLink path={link.path}>{link.label}</NavLink>
+                  </li>
+                );
+            })}
+          </ul>
         </nav>
       </header>
     </>
