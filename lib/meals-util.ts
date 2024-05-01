@@ -8,7 +8,7 @@ export const getMeals = async () => {
 
   const resultParsed = mealArraySchema.safeParse(result);
 
-  if (!resultParsed.success) return [];
+  if (!resultParsed.success) throw new Error("Loading meals failed!");
 
   return resultParsed.data;
 };
