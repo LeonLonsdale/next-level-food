@@ -1,8 +1,11 @@
 import Link from "next/link";
 import classes from "./page.module.css";
 import { paths } from "@/lib/paths";
+import MealsGrid from "@/components/meals/meals-grid";
+import { getMeals } from "@/lib/meals-util";
 
-export default function MealsPage() {
+export default async function MealsPage() {
+  const meals = (await getMeals()) || [];
   return (
     <>
       <header className={classes.header}>
@@ -11,14 +14,15 @@ export default function MealsPage() {
           <span className={classes.highlight}>by you</span>
         </h1>
         <p>
-          Choose your favourite recipe and cook it yourself. It is easy, and fun
+          Choose your favourite recipe and cook it yourself. It is easy, and
+          fun.
         </p>
         <p className={classes.cta}>
           <Link href={paths.meals.share.path}>Share your favourite recipe</Link>
         </p>
       </header>
       <main className={classes.main}>
-        <h1>Meals Page</h1>
+        <MealsGrid meals={meals} />
       </main>
     </>
   );

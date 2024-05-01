@@ -33,7 +33,7 @@ export default function MealItem({
       <div className={classes.content}>
         <p className={classes.summary}>{summary}</p>
         <div className={classes.actions}>
-          <Link href={paths.dynamic.meal.path(slug)}>View Details</Link>
+          <Link href={paths.meals.oneMeal(slug)}>View Details</Link>
         </div>
       </div>
     </article>
