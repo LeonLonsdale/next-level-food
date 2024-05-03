@@ -1,6 +1,7 @@
 import Image from "next/image";
 import classes from "./page.module.css";
 import { getMeal } from "@/lib/meals-util";
+import { notFound } from "next/navigation";
 
 interface MealDetailsProps {
   params: { slug: string };
@@ -10,6 +11,8 @@ export default function MealDetails({ params }: MealDetailsProps) {
   const { slug } = params;
 
   const meal = getMeal(slug);
+
+  if (!meal) return notFound();
 
   meal.instructions = meal.instructions.replace(/\n/g, "<br />");
 

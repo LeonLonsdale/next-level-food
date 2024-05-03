@@ -18,8 +18,9 @@ export const getMeal = (slug: string) => {
 
   const resultParsed = mealSchema.safeParse(result);
 
-  if (!resultParsed.success)
-    throw new Error("Cannot find this meal. Try again");
+  // if (!resultParsed.success)
+  //   throw new Error("Cannot find this meal. Try again");
+  if (!resultParsed.success) return null;
 
   return resultParsed.data;
 };
