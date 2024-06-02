@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { ZodSchema, ZodError, z } from "zod";
 
 export const mealSchema = z.object({
   id: z.number(),
@@ -8,7 +8,7 @@ export const mealSchema = z.object({
   summary: z.string(),
   instructions: z.string(),
   creator: z.string(),
-  creator_email: z.string(),
+  creator_email: z.string().email(),
 });
 
 export const imageUploadSchema = z.object({
@@ -20,7 +20,8 @@ export const imageUploadSchema = z.object({
     .refine((file) => file.size <= 5 * 1024 * 1024, {
       message:
         "The image is too large. Please upload an image that is less than 5MB.",
-    }),
+    })
+    .refine((file) => file.size > 0, { message: "An image is required!" }),
 });
 
 export const mealArraySchema = z.array(mealSchema);
