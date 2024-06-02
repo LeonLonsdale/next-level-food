@@ -1,5 +1,9 @@
+import fs from "node:fs";
+
 import sql from "better-sqlite3";
-import { mealArraySchema, mealSchema } from "./validators";
+import { FormMeal, Meal, mealArraySchema, mealSchema } from "./validators";
+import slugify from "slugify";
+import xss from "xss";
 
 const db = sql("meals.db");
 
@@ -23,4 +27,13 @@ export const getMeal = (slug: string) => {
   if (!resultParsed.success) return null;
 
   return resultParsed.data;
+};
+
+export const saveMeal = async (meal: Omit<Meal, "id">) => {
+  db.prepare(
+    `
+  INSERT INTO meals (title, slug, image, summary, instructions, creator, creator_email)
+  VALUES (@title, @slug, @image, @summary, @instructions, @creator, @creator_email)
+  `
+  ).run(meal);
 };

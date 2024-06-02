@@ -1,5 +1,7 @@
+import { formMealSchema } from "@/lib/validators";
 import classes from "./page.module.css";
 import ImagePicker from "@/components/meals/image-picker";
+import * as actions from "@/actions";
 
 export default function ShareMealPage() {
   return (
@@ -11,7 +13,7 @@ export default function ShareMealPage() {
         <p>Or any other meal you feel needs sharing!</p>
       </header>
       <main className={classes.main}>
-        <form className={classes.form}>
+        <form className={classes.form} action={actions.shareMeal}>
           <div className={classes.row}>
             <p>
               <label htmlFor="name">Your name</label>
@@ -24,6 +26,10 @@ export default function ShareMealPage() {
           </div>
           <p>
             <label htmlFor="title">Title</label>
+            <input type="text" id="title" name="title" required />
+          </p>
+          <p>
+            <label htmlFor="summary">Summary</label>
             <input type="text" id="summary" name="summary" required />
           </p>
           <p>
