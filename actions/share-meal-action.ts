@@ -1,15 +1,11 @@
 "use server";
 import { saveMeal } from "@/lib/meals-util";
 import { formMealSchema } from "@/lib/validators";
-import {
-  createMealObject,
-  safeValidateObject,
-  storeMealImage,
-} from "@/lib/util";
+import { createMealObject, zodParse, storeMealImage } from "@/lib/util";
 import { ZodError } from "zod";
 
 export const shareMeal = async (formData: FormData) => {
-  const formObject = {
+  const formMeal = {
     title: formData.get("title"),
     summary: formData.get("summary"),
     instructions: formData.get("instructions"),
@@ -20,14 +16,14 @@ export const shareMeal = async (formData: FormData) => {
   };
 
   try {
-    const validatedObject = safeValidateObject(formMealSchema, formObject);
-    const mealObject = await createMealObject(validatedObject);
+    const validatedFormMeal = zodParse(formMealSchema, formMeal);
+    const newMeal = await createMealObject(validatedFormMeal);
 
-    const { image: imageFile } = validatedObject;
-    const { image: imagePath } = mealObject;
+    const { image: imageFile } = validatedFormMeal;
+    const { image: imagePath } = newMeal;
     storeMealImage(imageFile, imagePath);
 
-    await saveMeal(mealObject);
+    await saveMeal(newMeal);
   } catch (error: unknown) {
     if (error instanceof ZodError) {
       return error.flatten();

@@ -3,33 +3,30 @@ import { FormMeal, Meal } from "./validators";
 import slugify from "slugify";
 import xss from "xss";
 import fs from "node:fs";
+import { get } from "node:http";
 
-export const getImageExtension = (file: File) => {
+export const getFileExtension = (file: File) => {
   const extension = file.name.split(".").pop();
   if (!extension) throw new Error("Invalid file extension");
   return extension;
 };
 
-export const makeImageName = (name: string, extension: string) =>
+export const getFileName = (name: string, extension: string) =>
   `${name}.${extension}`;
 
-export const getImagePath = (file: File, title: string) => {
-  const extension = getImageExtension(file);
-  const fileName = makeImageName(title, extension);
-  return `/images/${fileName}`;
-};
+export const getImagePath = (fileName: string) => `/images/${fileName}`;
 
-export const safeValidateObject = <T>(schema: ZodSchema<T>, obj: unknown) =>
+export const zodParse = <T>(schema: ZodSchema<T>, obj: unknown) =>
   schema.parse(obj);
 
-export const createMealObject = async (validatedObject: FormMeal) => {
-  const { title, image } = validatedObject;
+export const createMealObject = async (validatedFormMeal: FormMeal) => {
+  const { title, image } = validatedFormMeal;
   const slug = slugify(title, { lower: true });
-  const instructions = xss(validatedObject.instructions);
-  const filePath = getImagePath(image, slug);
+  const instructions = xss(validatedFormMeal.instructions);
+  const filePath = getImagePath(getFileName(slug, getFileExtension(image)));
 
   const meal: Omit<Meal, "id"> = {
-    ...validatedObject,
+    ...validatedFormMeal,
     slug,
     instructions,
     image: filePath,
