@@ -3,6 +3,7 @@ import { saveMealToDB } from "@/lib/meals-util";
 import { formMealSchema } from "@/lib/validators";
 import { createMealObject, zodParse, storeMealImage } from "@/lib/util";
 import { ZodError } from "zod";
+import { redirect } from "next/navigation";
 
 export const shareMeal = async (formData: FormData) => {
   const formMeal = {
@@ -31,4 +32,5 @@ export const shareMeal = async (formData: FormData) => {
       return { message: "Something went wrong." };
     }
   }
+  redirect("/meals");
 };

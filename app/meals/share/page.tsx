@@ -1,7 +1,8 @@
-import { formMealSchema } from "@/lib/validators";
 import classes from "./page.module.css";
 import ImagePicker from "@/components/meals/image-picker";
 import * as actions from "@/actions";
+
+import ShareMealSubmitButton from "@/components/meals/share-meal-submit-button";
 
 export default function ShareMealPage() {
   return (
@@ -43,7 +44,7 @@ export default function ShareMealPage() {
           </p>
           <ImagePicker label="image" name="image" />
           <p className={classes.actions}>
-            <button type="submit">Share Meal</button>
+            <ShareMealSubmitButton />
           </p>{" "}
         </form>
       </main>
