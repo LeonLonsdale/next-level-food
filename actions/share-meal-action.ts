@@ -1,5 +1,5 @@
 "use server";
-import { saveMeal } from "@/lib/meals-util";
+import { saveMealToDB } from "@/lib/meals-util";
 import { formMealSchema } from "@/lib/validators";
 import { createMealObject, zodParse, storeMealImage } from "@/lib/util";
 import { ZodError } from "zod";
@@ -23,7 +23,7 @@ export const shareMeal = async (formData: FormData) => {
     const { image: imagePath } = newMeal;
     storeMealImage(imageFile, imagePath);
 
-    await saveMeal(newMeal);
+    await saveMealToDB(newMeal);
   } catch (error: unknown) {
     if (error instanceof ZodError) {
       return error.flatten();

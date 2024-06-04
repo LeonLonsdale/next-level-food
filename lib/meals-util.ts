@@ -29,7 +29,7 @@ export const getMeal = (slug: string) => {
   return resultParsed.data;
 };
 
-export const saveMeal = async (meal: Omit<Meal, "id">) => {
+export const saveMealToDB = async (meal: Omit<Meal, "id">) => {
   db.prepare(
     `
   INSERT INTO meals (title, slug, image, summary, instructions, creator, creator_email)
