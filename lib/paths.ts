@@ -1,17 +1,3 @@
-// export const paths = {
-//   static: {
-//     home: { label: "Home", path: "/" },
-//     shareMeal: { label: "Share", path: "/meals/share" },
-//   },
-//   navigation: {
-//     meals: { label: "Browse Meals", path: "/meals" },
-//     community: { label: "Foodies Community", path: "/community" },
-//   },
-//   dynamic: {
-//     meal: { path: (mealId: string) => `/meals/${mealId}` },
-//   },
-// };
-
 export const paths = {
   home: { label: "Home", path: "/" },
   meals: {

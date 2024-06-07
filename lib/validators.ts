@@ -1,4 +1,4 @@
-import { ZodSchema, ZodError, z } from "zod";
+import { z } from "zod";
 
 export const mealSchema = z.object({
   id: z.number(),

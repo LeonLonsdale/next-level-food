@@ -1,4 +1,4 @@
-import { ZodError, ZodSchema } from "zod";
+import { ZodSchema } from "zod";
 import { FormMeal, Meal } from "./validators";
 import slugify from "slugify";
 import xss from "xss";
