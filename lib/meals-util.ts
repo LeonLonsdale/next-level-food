@@ -1,5 +1,6 @@
 import sql from "better-sqlite3";
-import { Meal, mealArraySchema, mealSchema } from "./validators";
+import { Meal } from "@/lib/types";
+import { mealArraySchema, mealSchema } from "./validators";
 
 const db = sql("meals.db");
 

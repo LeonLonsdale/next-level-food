@@ -1,9 +1,8 @@
 import { ZodSchema } from "zod";
-import { FormMeal, Meal } from "./validators";
+import { FormMeal, Meal } from "@/lib/types";
 import slugify from "slugify";
 import xss from "xss";
 import fs from "node:fs";
-import { get } from "node:http";
 
 export const getFileExtension = (file: File) => {
   const extension = file.name.split(".").pop();

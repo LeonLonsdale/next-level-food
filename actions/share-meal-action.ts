@@ -4,8 +4,12 @@ import { formMealSchema } from "@/lib/validators";
 import { createMealObject, zodParse, storeMealImage } from "@/lib/util";
 import { ZodError } from "zod";
 import { redirect } from "next/navigation";
+import { NewMealFormState } from "@/lib/types";
 
-export const shareMeal = async (formData: FormData) => {
+export const shareMeal = async (
+  _prevState: NewMealFormState,
+  formData: FormData
+) => {
   const formMeal = {
     title: formData.get("title"),
     summary: formData.get("summary"),
@@ -27,9 +31,13 @@ export const shareMeal = async (formData: FormData) => {
     await saveMealToDB(newMeal);
   } catch (error: unknown) {
     if (error instanceof ZodError) {
-      return error.flatten();
+      return {
+        message:
+          "You've entered something incorrectly. Please check the form and try again.",
+        errors: error.flatten().fieldErrors,
+      };
     } else {
-      return { message: "Something went wrong." };
+      return { message: "Something went wrong.", errors: {} };
     }
   }
   redirect("/meals");

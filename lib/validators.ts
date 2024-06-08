@@ -2,13 +2,13 @@ import { z } from "zod";
 
 export const mealSchema = z.object({
   id: z.number(),
-  title: z.string(),
+  title: z.string().trim(),
   slug: z.string(),
   image: z.string(),
-  summary: z.string(),
-  instructions: z.string(),
-  creator: z.string(),
-  creator_email: z.string().email(),
+  summary: z.string().trim(),
+  instructions: z.string().trim(),
+  creator: z.string().trim(),
+  creator_email: z.string().trim().min(5).email(), // min 5 a@b.c is valid
 });
 
 export const imageUploadSchema = z.object({
@@ -29,7 +29,3 @@ export const mealArraySchema = z.array(mealSchema);
 export const formMealSchema = mealSchema
   .omit({ id: true })
   .extend({ image: imageUploadSchema.shape.image });
-
-export type ImageUpload = z.infer<typeof imageUploadSchema>;
-export type Meal = z.infer<typeof mealSchema>;
-export type FormMeal = z.infer<typeof formMealSchema>;

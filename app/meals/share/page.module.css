@@ -39,6 +39,12 @@
   font-weight: bold;
 }
 
+.form fieldset {
+  border: none;
+  width: 100%;
+  padding-inline: 0;
+}
+
 .form input,
 .form textarea {
   display: block;
@@ -95,4 +101,16 @@
   background: #ccc;
   color: #979797;
   cursor: not-allowed;
+}
+
+.error {
+  color: #d8000c;
+  background-color: #ffbaba;
+  border: 1px solid #d8000c;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+  /* display: inline-block; */
 }
