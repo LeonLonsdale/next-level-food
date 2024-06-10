@@ -9,7 +9,7 @@ import { NewMealFormState } from "@/lib/types";
 export const shareMeal = async (
   _prevState: NewMealFormState,
   formData: FormData
-) => {
+): Promise<NewMealFormState> => {
   const formMeal = {
     title: formData.get("title"),
     summary: formData.get("summary"),
