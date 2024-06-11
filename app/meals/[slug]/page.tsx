@@ -7,6 +7,19 @@ interface MealDetailsProps {
   params: { slug: string };
 }
 
+export async function generateMetadata({ params }: MealDetailsProps) {
+  const { slug } = params;
+
+  const meal = getMeal(slug);
+
+  if (!meal) return notFound();
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 export default function MealDetails({ params }: MealDetailsProps) {
   const { slug } = params;
 
