@@ -5,6 +5,7 @@ import { createMealObject, zodParse, storeMealImage } from "@/lib/util";
 import { ZodError } from "zod";
 import { redirect } from "next/navigation";
 import { NewMealFormState } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 
 export const shareMeal = async (
   _prevState: NewMealFormState,
@@ -40,5 +41,6 @@ export const shareMeal = async (
       return { message: "Something went wrong.", errors: {} };
     }
   }
+  revalidatePath("/meals");
   redirect("/meals");
 };
